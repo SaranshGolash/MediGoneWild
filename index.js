@@ -8,12 +8,17 @@ import dotenv from "dotenv";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
+// NEW: Import LocalStrategy and bcrypt
+import { Strategy as LocalStrategy } from "passport-local";
+import bcrypt from "bcrypt";
+
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const db = new pg.Pool(); // Assumes PGHOST, PGUSER, etc. are in .env
+const saltRounds = 10; // NEW: For bcrypt hashing
 
 const NUMERIC_OID = 1700;
 pg.types.setTypeParser(NUMERIC_OID, (value) => {
@@ -47,7 +52,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// NEW: Global middleware to pass user to all templates
+// Global middleware to pass user to all templates
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
@@ -60,19 +65,63 @@ app.get("/", (req, res) => {
 
 // === Auth Routes ===
 app.get("/login", (req, res) => {
-  if (req.user) return res.redirect("/dashboard"); // Redirect if already logged in
+  if (req.user) return res.redirect("/dashboard");
   res.render("login");
 });
 
 app.get("/signup", (req, res) => {
-  if (req.user) return res.redirect("/dashboard"); // Redirect if already logged in
+  if (req.user) return res.redirect("/dashboard");
   res.render("signup");
 });
 
-// NEW: Logout Route
+// NEW: POST Route for Local Login
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/login",
+    // failureFlash: true, // Optional: if you add connect-flash
+  })
+);
+
+// NEW: POST Route for Local Signup
+app.post("/signup", async (req, res, next) => {
+  const { firstName, lastName, email, password } = req.body;
+
+  try {
+    // 1. Check if user already exists
+    const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+
+    if (checkResult.rows.length > 0) {
+      // TODO: Add flash message "Email already in use."
+      return res.redirect("/signup");
+    }
+
+    // 2. If not, hash password and create new user
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const newUser = await db.query(
+      "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *",
+      [firstName, lastName, email, hashedPassword]
+    );
+
+    // 3. Log the new user in
+    req.login(newUser.rows[0], (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/dashboard");
+    });
+  } catch (err) {
+    console.error("Signup error:", err);
+    return next(err);
+  }
+});
+
+// Logout Route
 app.get("/logout", (req, res, next) => {
   req.logout((err) => {
-    // req.logout() is now async
     if (err) {
       return next(err);
     }
@@ -80,7 +129,7 @@ app.get("/logout", (req, res, next) => {
       if (err) {
         console.log("Error destroying session:", err);
       }
-      res.redirect("/"); // Redirect to homepage
+      res.redirect("/");
     });
   });
 });
@@ -94,19 +143,59 @@ app.get("/doctors", (req, res) => {
   res.render("doctors");
 });
 
-// NEW: Placeholder Settings Route
 app.get("/settings", (req, res) => {
-  if (!req.user) return res.redirect("/login"); // Protect this route
-  res.render("settings"); // We will create settings.ejs
+  if (!req.user) return res.redirect("/login");
+  res.render("settings");
 });
 
 // === Patient Portal Route ===
 app.get("/dashboard", (req, res) => {
-  if (!req.user) return res.redirect("/login"); // Protect this route
-  res.render("dashboard"); // user is already passed via middleware
+  if (!req.user) return res.redirect("/login");
+  res.render("dashboard");
 });
 
+// NEW: === Passport Local Strategy ===
+// This strategy is for verifying email/password logins
+passport.use(
+  new LocalStrategy(
+    { usernameField: "email" },
+    async (email, password, done) => {
+      try {
+        const result = await db.query("SELECT * FROM users WHERE email = $1", [
+          email,
+        ]);
+        const user = result.rows[0];
+
+        // 1. Check if user exists
+        if (!user) {
+          return done(null, false, { message: "Incorrect email or password." });
+        }
+
+        // 2. Check if user has a local password (not a Google-only account)
+        if (!user.password) {
+          return done(null, false, {
+            message:
+              "This email is registered with Google. Please use 'Sign in with Google'.",
+          });
+        }
+
+        // 3. Check if password is correct
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+          return done(null, false, { message: "Incorrect email or password." });
+        }
+
+        // 4. If all checks pass, return the user
+        return done(null, user);
+      } catch (err) {
+        return done(err);
+      }
+    }
+  )
+);
+
 // === Passport Google OAuth Strategy ===
+// (This section is unchanged)
 passport.use(
   new GoogleStrategy(
     {
@@ -124,6 +213,18 @@ passport.use(
         if (result.rows.length > 0) {
           return done(null, result.rows[0]);
         } else {
+          // Check if email exists from a local signup
+          const emailCheck = await db.query(
+            "SELECT * FROM users WHERE email = $1",
+            [profile.emails[0].value]
+          );
+          if (emailCheck.rows.length > 0) {
+            // TODO: Link accounts
+            // For now, just return the existing local user
+            return done(null, emailCheck.rows[0]);
+          }
+
+          // Create new Google user
           const newUser = await db.query(
             "INSERT INTO users (google_id, email, first_name, last_name, profile_pic) VALUES ($1, $2, $3, $4, $5) RETURNING *",
             [
@@ -158,11 +259,13 @@ app.get(
 );
 
 // === Passport Serialization ===
+// (Unchanged - this works for both strategies)
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 // === Passport Deserialization ===
+// (Unchanged - this works for both strategies)
 passport.deserializeUser(async (id, done) => {
   try {
     const result = await db.query("SELECT * FROM users WHERE id = $1", [id]);

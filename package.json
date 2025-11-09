@@ -26,6 +26,7 @@
     "env": "^0.0.2",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
+    "openai": "^6.8.1",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",

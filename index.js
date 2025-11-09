@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import dotenv from "dotenv";
 import passport from "passport";
+import { OpenAI } from "openai";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
 // NEW: Import LocalStrategy and bcrypt
@@ -23,6 +24,11 @@ const db = new pg.Pool({
   user: process.env.DBUSER,
   password: process.env.DBPASSWORD,
   database: process.env.DBDATABASE,
+});
+
+// Initialize OPENAI
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const saltRounds = 10; // NEW: For bcrypt hashing
@@ -201,6 +207,47 @@ app.post("/contact", async (req, res) => {
   } catch (err) {
     console.error("Contact form error:", err);
     res.redirect("/contact?status=error"); // Redirect with an error
+  }
+});
+
+// Chatbot API Route
+app.post("/chat", async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ error: "Please log in to use the chatbot." });
+  }
+
+  const { message } = req.body;
+
+  try {
+    // This is the "innovation" from your CareFlow project.
+    // We give the bot a persona and rules.
+    const systemPrompt = `
+      You are a helpful and friendly assistant for MediGoneWild, a hospital.
+      Your name is "CareFlow Assist".
+      Your role is to help patients by:
+      1. Answering general questions about the hospital's services, visiting hours, and departments.
+      2. Helping users find doctors by specialty.
+      3. Providing general health and wellness tips.
+
+      **Your STRICT rules are:**
+      - You MUST NOT provide any medical advice, diagnoses, or treatment plans.
+      - If a user asks for medical advice, you MUST refuse and advise them to "book an appointment with one of our doctors" or "call 911 in an emergency."
+      - Be compassionate, clear, and concise.
+      - Do not make up information about the hospital. If you don't know, say "I can't find that information, but you can contact our staff at 123-456-7890."
+    `;
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo", // You can use gpt-4 if you prefer
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: message },
+      ],
+    });
+
+    res.json({ reply: completion.choices[0].message.content });
+  } catch (err) {
+    console.error("OpenAI error:", err);
+    res.status(500).json({ error: "Something went wrong." });
   }
 });
 

@@ -4,7 +4,33 @@ const btnClose = document.querySelector("#btn-close");
 const media = window.matchMedia("(width < 900px)");
 const navLinkContainer = document.querySelector(".nav-link-container");
 const navLinks = document.querySelectorAll("[data-scroll]");
+// User Dropdown Toggle
+document.addEventListener("DOMContentLoaded", () => {
+  const userMenuBtn = document.getElementById("userMenuBtn");
+  const userDropdown = document.getElementById("userDropdown");
 
+  if (userMenuBtn) {
+    userMenuBtn.addEventListener("click", () => {
+      // Toggle the .show and .open classes
+      userDropdown.classList.toggle("show");
+      userMenuBtn.classList.toggle("open");
+    });
+  }
+
+  // Close dropdown if clicking outside of it
+  window.addEventListener("click", (e) => {
+    if (
+      userMenuBtn &&
+      !userMenuBtn.contains(e.target) &&
+      !userDropdown.contains(e.target)
+    ) {
+      if (userDropdown.classList.contains("show")) {
+        userDropdown.classList.remove("show");
+        userMenuBtn.classList.remove("open");
+      }
+    }
+  });
+});
 function setUpNav(e) {
   if (e.matches) {
     //is mobile

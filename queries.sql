@@ -7,3 +7,6 @@ CREATE TABLE users (
   profile_pic TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE users
+ADD COLUMN password VARCHAR(255);

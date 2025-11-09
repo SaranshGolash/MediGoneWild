@@ -42,4 +42,30 @@
   <div class="footer-bar">
     <p>&copy; 2024 All Rights Reserved By MediGoneWild</p>
   </div>
+  <% if (user) { %>
+  <div class="chat-bubble" id="chat-bubble">
+    <i class="fa-solid fa-comment-dots"></i>
+  </div>
+
+  <div class="chat-window" id="chat-window">
+    <div class="chat-header">CareFlow Assist</div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-message bot">
+        Hi <%= user.first_name %>! How can I help you today?
+      </div>
+    </div>
+    <form class="chat-input-form" id="chat-form">
+      <input
+        type="text"
+        class="chat-input"
+        id="chat-input"
+        placeholder="Ask a question..."
+      />
+      <button type="submit" class="chat-send-btn">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </form>
+  </div>
+  <% } %>
+  <script src="/js/chatbot.js"></script>
 </footer>

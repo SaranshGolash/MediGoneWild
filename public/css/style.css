@@ -168,6 +168,67 @@ header {
   gap: 2rem;
 }
 
+/* === User Dropdown Menu === */
+.user-menu {
+  position: relative;
+}
+
+.user-menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+}
+
+/* Dropdown arrow icon */
+.user-menu-btn .fa-chevron-down {
+  font-size: 0.8rem;
+  transition: transform 0.3s;
+}
+
+/* Add 'open' class with JS to rotate arrow */
+.user-menu-btn.open .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+.user-dropdown {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 110%; /* Position just below the button */
+  right: 0;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  z-index: 100;
+  overflow: hidden; /* Ensures border-radius on links */
+}
+
+/* Add 'show' class with JS to display */
+.user-dropdown.show {
+  display: block;
+}
+
+.user-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.user-dropdown a i {
+  width: 20px; /* Aligns icons nicely */
+  text-align: center;
+}
+
+.user-dropdown a:hover {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color);
+}
+
 @media (width < 900px) {
   /* Stack all button groups vertically in the mobile menu */
   .contact-btn {
@@ -696,5 +757,22 @@ header {
   .header-container h1 {
     font-size: 2.5rem;
     line-height: 3rem;
+  }
+}
+
+/* Responsive (Stacking in mobile menu) */
+@media (width < 900px) {
+  .user-menu {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .user-menu-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .user-dropdown {
+    width: 100%;
+    top: 110%;
+    right: auto;
   }
 }

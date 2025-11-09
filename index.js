@@ -17,7 +17,14 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const db = new pg.Pool(); // Assumes PGHOST, PGUSER, etc. are in .env
+const db = new pg.Pool({
+  host: process.env.DBHOST,
+  port: process.env.DBPORT,
+  user: process.env.DBUSER,
+  password: process.env.DBPASSWORD,
+  database: process.env.DBDATABASE,
+});
+
 const saltRounds = 10; // NEW: For bcrypt hashing
 
 const NUMERIC_OID = 1700;

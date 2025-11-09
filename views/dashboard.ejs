@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Patient Dashboard - MediGoneWild</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <main>
+      <section class="dashboard-header">
+        <h1>Welcome, Patient!</h1>
+        <p>Manage your appointments, view your profile, and more.</p>
+      </section>
+
+      <section class="section-container">
+        <div class="dashboard-grid">
+          <div class="dashboard-card">
+            <div class="dashboard-card-icon">
+              <i class="fa-solid fa-calendar-check"></i>
+            </div>
+            <h3>My Appointments</h3>
+            <p>
+              View, schedule, or reschedule your upcoming appointments with our
+              doctors.
+            </p>
+            <a href="/my-appointments" class="btn">View Appointments</a>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="dashboard-card-icon">
+              <i class="fa-solid fa-user-gear"></i>
+            </div>
+            <h3>My Profile</h3>
+            <p>
+              Update your personal information, contact details, and password.
+            </p>
+            <a href="/my-profile" class="btn">Edit Profile</a>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="dashboard-card-icon">
+              <i class="fa-solid fa-file-medical"></i>
+            </div>
+            <h3>Medical Records</h3>
+            <p>
+              Access your test results, prescription history, and medical
+              reports. (Coming Soon)
+            </p>
+            <a
+              href="#"
+              class="btn"
+              style="background-color: #ccc; cursor: not-allowed"
+            >
+              View Records
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>

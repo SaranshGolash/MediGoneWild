@@ -367,20 +367,116 @@ header {
 
 /* Footer section */
 
+/* === New Footer Section === */
+
 .footer {
+  /* This uses your existing light yellow background */
   background-color: var(--primary-color-light);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* We remove padding here to let the containers manage it */
+  padding-top: 5rem;
 }
 
-.footer-container p {
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap; /* Allows columns to stack on small screens */
+  padding-bottom: 3rem; /* Spacing before the copyright bar */
+}
+
+.footer-col {
+  /* Each column will share space, but won't shrink below 250px */
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Footer Brand/Logo Column */
+.footer-col .logo {
+  margin-bottom: 1rem;
+}
+.footer-col p {
+  color: var(--text-light);
+  max-width: 300px;
+}
+
+/* Footer Links & Contact Columns */
+.footer-col h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-dark); /* Dark text for heading */
+  margin-bottom: 1.5rem;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.75rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-col ul li a {
+  color: var(--text-light);
+  transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+  /* Uses your primary yellow for hover */
+  color: var(--primary-color);
+}
+
+/* Footer Social Icons */
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+  color: var(--primary-color); /* Icon color */
+  border: 1px solid var(--primary-color); /* Border color */
+  border-radius: 50%;
+  transition: 0.3s ease-in-out;
+}
+
+.footer-socials a:hover {
+  background-color: var(--primary-color); /* Background on hover */
+  color: var(--white); /* Icon color on hover */
+  border-color: var(--primary-color);
+}
+
+/* Footer Copyright Bar */
+.footer-bar {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  /* Adds a subtle line to separate it */
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.footer-bar p {
   color: var(--text-dark);
   font-weight: 500;
 }
-.footer-container p a {
+
+.footer-bar p a {
   color: var(--primary-color);
   font-weight: 500;
+}
+
+/* Cleanup old footer styles */
+.footer-container p {
+  /* This is no longer needed */
+  display: none;
 }
 
 @media (width < 900px) {

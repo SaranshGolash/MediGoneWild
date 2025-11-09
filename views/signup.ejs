@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sign Up - MediGoneWild</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <main>
+      <section class="auth-container">
+        <form action="/signup" method="POST" class="auth-form">
+          <h2>Create Account</h2>
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+          <input type="text" name="lastName" placeholder="Last Name" required />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Create Password"
+            required
+          />
+          <button type="submit" class="btn">Sign Up</button>
+          <div class="auth-switch">
+            <p>Already have an account? <a href="/login">Login</a></p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>

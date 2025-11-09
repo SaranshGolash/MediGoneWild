@@ -155,29 +155,53 @@ app.get("/settings", (req, res) => {
   res.render("settings");
 });
 
-// === Patient Portal Route ===
+// Patient Portal Route
 app.get("/dashboard", (req, res) => {
   if (!req.user) return res.redirect("/login");
   res.render("dashboard");
 });
 
-// === Patient Portal Route ===
+// Patient Portal Route
 app.get("/dashboard", (req, res) => {
   if (!req.user) return res.redirect("/login"); // Protect this route
   res.render("dashboard"); // user is already passed via middleware
 });
 
-// NEW: Appointments Route
+// Appointments Route
 app.get("/my-appointments", (req, res) => {
   if (!req.user) return res.redirect("/login"); // Protect this route
   // In the future, you'll fetch appointments from your database
   res.render("my-appointments", { appointments: [] }); // Pass user from middleware
 });
 
-// NEW: Profile/Edit Route
+// Profile/Edit Route
 app.get("/my-profile", (req, res) => {
   if (!req.user) return res.redirect("/login"); // Protect this route
   res.render("my-profile"); // Pass user from middleware
+});
+
+// Contact Us Route
+app.get("/contact", (req, res) => {
+  res.render("contact"); // user is passed via global middleware
+});
+
+app.post("/contact", async (req, res) => {
+  const { name, email, subject, message } = req.body;
+  // Get user ID if they are logged in
+  const userId = req.user ? req.user.id : null;
+
+  try {
+    await db.query(
+      "INSERT INTO messages (name, email, subject, message, user_id) VALUES ($1, $2, $3, $4, $5)",
+      [name, email, subject, message, userId]
+    );
+
+    // TODO: Add a flash message for success
+    res.redirect("/contact?status=success"); // Redirect back with a success query
+  } catch (err) {
+    console.error("Contact form error:", err);
+    res.redirect("/contact?status=error"); // Redirect with an error
+  }
 });
 
 // Passport Local Strategy

@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 :root {
-  --primary-color: #ebe017;
+  --primary-color: #dcb106;
   --primary-color-dark: #161614;
-  --primary-color-light: #ebf2f2;
-  --secondary-color: #dcb106;
+  --primary-color-light: #fef9e7;
+  --secondary-color: #dad015;
   --text-head: #131312;
   --text-dark: #0d0d0d;
   --text-light: #161614;
@@ -51,8 +51,6 @@
 img {
   width: 100%;
   display: flex;
-  
-  
 }
 
 a {
@@ -68,10 +66,10 @@ body {
 header {
   background-image: linear-gradient(
       to left,
-      rgba(226, 166, 14, 0.918),
-      rgba(239, 209, 13, 0.705)
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
     ),
-    url("./assets/homeBg.jpg");
+    url("/assets/homeBg.jpg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -96,7 +94,7 @@ header {
 .logo img {
   width: 70px;
   height: 70px;
-  background-image :transparent ;
+  background-image: transparent;
 }
 
 .nav-link-container {
@@ -155,7 +153,6 @@ header {
   color: var(--primary-color-light);
 }
 
-
 /* Header form section */
 
 .header-form {
@@ -205,6 +202,10 @@ header {
 .service-head-content p {
   max-width: 600px;
   color: var(--text-light);
+}
+
+.service-head-content h2 {
+  color: var(--primary-color);
 }
 
 .service-btn {
@@ -295,6 +296,10 @@ header {
   color: var(--text-light);
 }
 
+.about-content h2 {
+  color: var(--primary-color);
+}
+
 .about-img img {
   max-width: 500px;
   margin: auto;
@@ -320,6 +325,10 @@ header {
 
 .whyUs-content p {
   color: var(--text-light);
+}
+
+.whyUs-content h2 {
+  color: var(--primary-color);
 }
 
 /* why us feature list section */

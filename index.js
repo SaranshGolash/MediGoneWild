@@ -24,6 +24,9 @@ const db = new pg.Pool({
   user: process.env.DBUSER,
   password: process.env.DBPASSWORD,
   database: process.env.DBDATABASE,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 // Initialize OPENAI

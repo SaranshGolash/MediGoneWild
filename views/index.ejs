@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,follow" />
+    <meta name="author" content="Sakshi Jaiswal" />
+    <meta name="description" content="MediGoneWild is a responsive hospital service website built with HTML, CSS, and JavaScript, offering a seamless user experience across all devices." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://medigo-by-me.vercel.app/assets/mediGo.png" />
+    <title>MediGoneWild</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="./assets/mediGo.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <header id="home">
+      <nav class="section-container nav-container">
+        <div class="logo">
+          <img src="./assets/mediGo.png" alt="logo" />
+          <span>MediGoneWild</span>
+        </div>
+        <span id="nav-label" hidden>navigation</span>
+        <button
+          id="btn-open"
+          class="nav-open"
+          aria-expanded="false"
+          aria-labelledby="nav-label"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div
+          class="nav-link-container"
+          role="dialog"
+          aria-labelledby="nav-label"
+        >
+          <button class="nav-close" id="btn-close" aria-label="close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <ul class="nav-links">
+            <li class="link"><a class="item-link" href="#home" data-scroll>Home</a></li>
+            <li class="link"><a class="item-link" href="#about" data-scroll>About Us</a></li>
+            <li class="link"><a class="item-link" href="#service" data-scroll>Services</a></li>
+            <li class="link"><a class="item-link" href="#" data-scroll>Pages</a></li>
+            <li class="link"><a class="item-link" href="#" data-scroll>Blogs</a></li>
+          </ul>
+          <button class="btn contact-btn">Contact Us</button>
+        </div>
+      </nav>
+      <div class="section-container header-container">
+        <div class="head-content">
+          <h1>Delivering an Outstanding Care Journey for Patients</h1>
+          <p>
+           Welcome to MediGoneWild, where compassionate care meets advanced medical expertise. Our hospital is dedicated to providing high-quality healthcare services with state-of-the-art facilities, experienced doctors, and a patient-first approach. From emergency care to specialized treatments, we strive to ensure every patient receives personalized attention in a safe and healing environment. Your health and well-being are our top priorities — because we care for you like family.
+          </p>
+          <button class="btn">
+            Get Services <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+        <div class="header-form">
+          <form action="#" id="form">
+            <h4>Book Appointment</h4>
+            <input type="text" placeholder="First Name" id="firstName" />
+            <input type="text" placeholder="Last Name" id="lastName" />
+            <input type="text" placeholder="Phone No." id="phoneNo" />
+            <input type="text" placeholder="Your Address" id="address" />
+            <button class="btn form-btn">Book Now</button>
+          </form>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="section-container service-container" id="service">
+        <div class="service-head">
+          <div class="service-head-content">
+            <h2 class="section-header">Our Sevices</h2>
+            <p>
+              we offer comprehensive healthcare services with advanced facilities and expert doctors. Our key areas include general medicine, emergency care, cardiology, orthopedics, gynecology, pediatrics, and diagnostics. We are committed to providing compassionate, affordable, and quality medical care for patients of all ages, every day.
+            </p>
+          </div>
+          <button class="service-btn">Ask a Service</button>
+        </div>
+        <div class="service-grid">
+          <!--Card: 01-->
+          <div class="service-card">
+            <span><i class="fa-solid fa-vial-virus"></i></span>
+            <h4>Laboratory Test</h4>
+            <p>
+              Accurate Diagnostics, Swift Results: Experience top-notch
+              Laboratory Testing at our facility.
+            </p>
+            <a href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <!--Card: 02-->
+          <div class="service-card">
+            <span><i class="fa-solid fa-user-nurse"></i></span>
+            <h4>Health Checkups</h4>
+            <p>
+              Regular Health Checkups and Guidance from our Specialized Team of
+              Doctors
+            </p>
+            <a href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <!--Card: 03-->
+          <div class="service-card">
+            <span><i class="fa-solid fa-truck-medical"></i></span>
+            <h4>Ambulatory care</h4>
+            <p>
+              We provide medical services performed on an outpatient basis,
+              without admission to a hospital.
+            </p>
+            <a href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container about-container" id="about">
+        <div class="about-content">
+          <h2 class="section-header">About Us</h2>
+          <p>
+           MediGoneWild is a leading healthcare center committed to providing high-quality medical care with compassion and excellence. Our hospital is equipped with advanced technology, modern infrastructure, and a dedicated team of experienced doctors, nurses, and support staff. We offer a wide range of services — from emergency care to specialized treatments — all under one roof. At MediGoneWild, we believe every patient deserves personalized attention, transparency, and comfort throughout their healing journey. Our mission is to create a healthier community by combining medical expertise with genuine care and trust.
+          </p>
+        </div>
+        <div class="about-img">
+          <img src="./assets/about.jpg" alt="About us" />
+        </div>
+      </section>
+
+      <section class="section-container whyUs-container">
+        <div class="whyUs-img">
+          <img src="./assets/whyUs.jpg" alt="Why Choose Us" />
+        </div>
+        <div class="whyUs-content">
+          <h2 class="section-header">Why Choose Us?</h2>
+          <p>
+            At MediGoneWild, we combine advanced medical technology with compassionate care. Our experienced doctors, 24/7 emergency services, and patient-focused approach ensure the highest standards of treatment. We offer affordable, transparent healthcare in a clean, safe environment — because your health, comfort, and trust are always our top priorities
+          </p>
+          <div class="features">
+            <span><i class="fa-solid fa-user-doctor"></i></span>
+            <div>
+              <h4>Inpatient care</h4>
+              <p>
+                We provide Inpatient care to the patients whose condition
+                requires admission to a hospital
+              </p>
+            </div>
+            <span><i class="fa-solid fa-hospital"></i></span>
+            <div>
+              <h4>Clinics and medical offices</h4>
+              <p>
+                We offer Clinics and medical offices who gives 24/7 medical
+                support.
+              </p>
+            </div>
+            <span><i class="fa-solid fa-suitcase-medical"></i></span>
+            <div>
+              <h4>Medical and Surgical</h4>
+              <p>
+                Our Medical and Surgical services offer advanced healthcare
+                solutions to address medical needs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="section-container footer-container">
+        <p>
+          &copy; 2024 All Rights Reserved By MediGoneWild
+          
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

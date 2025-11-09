@@ -1,0 +1,80 @@
+<footer class="footer">
+  <div class="section-container footer-content">
+    <div class="footer-col">
+      <div class="logo">
+        <img src="/assets/mediGo.png" alt="logo" />
+        <span>MediGoneWild</span>
+      </div>
+      <p>
+        Committed to providing high-quality medical care with compassion and
+        excellence. Your health and well-being are our top priorities.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#service">Services</a></li>
+        <li><a href="#">Pages</a></li>
+        <li><a href="#">Blogs</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <ul>
+        <li>
+          <i class="fa-solid fa-location-dot"></i> 123 Health St, Medicity
+        </li>
+        <li><i class="fa-solid fa-phone"></i> (123) 456-7890</li>
+        <li><i class="fa-solid fa-envelope"></i> info@medigonewild.com</li>
+      </ul>
+      <div class="footer-socials">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <p>&copy; 2024 All Rights Reserved By MediGoneWild</p>
+  </div>
+  <% if (user) { %>
+  <div class="chat-bubble" id="chat-bubble">
+    <img src="/assets/mediGo.png" alt="Chatbot Logo" />
+  </div>
+
+  <div class="chat-window" id="chat-window">
+    <div class="chat-header">MediGoWild Assist</div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-message bot">
+        Hi <%= user.first_name %>! How can I help you today?
+      </div>
+    </div>
+    <form class="chat-input-form" id="chat-form">
+      <input
+        type="text"
+        class="chat-input"
+        id="chat-input"
+        placeholder="Ask a question..."
+      />
+      <button type="submit" class="chat-send-btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="send-arrow-icon"
+        >
+          <path
+            d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405Z"
+          />
+        </svg>
+      </button>
+    </form>
+  </div>
+  <% } %>
+  <script src="/functionalities/chatbot.js"></script>
+</footer>

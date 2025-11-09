@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sign Up - MediGoneWild</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+    <link rel="stylesheet" href="/css/chatbot.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <main>
+      <section class="auth-container">
+        <form action="/signup" method="POST" class="auth-form">
+          <h2>Create Account</h2>
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+          <input type="text" name="lastName" placeholder="Last Name" required />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Create Password"
+            required
+          />
+          <button type="submit" class="btn">Sign Up</button>
+
+          <div class="auth-switch">
+            <p>Already have an account? <a href="/login">Login</a></p>
+          </div>
+
+          <div class="auth-divider">OR</div>
+          <a href="/auth/google" class="btn-oauth">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+              alt="Google logo"
+            />
+            Sign up with Google
+          </a>
+        </form>
+      </section>
+    </main>
+    <%- include('partials/footer') %>
+  </body>
+</html>

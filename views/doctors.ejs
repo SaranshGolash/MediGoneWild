@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Find a Doctor - MediGoneWild</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/doctors.css" />
+    <link rel="stylesheet" href="/css/chatbot.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <main>
+      <section class="doctors-page-header">
+        <h1>Find a Doctor</h1>
+        <p>
+          Meet our team of experienced, board-certified specialists dedicated to
+          your health.
+        </p>
+      </section>
+
+      <section class="section-container">
+        <div class="doctor-grid">
+          <div class="doctor-card">
+            <img
+              src="/assets/doc-img1.jpg"
+              alt="Dr. Emily White"
+              class="doctor-card-img"
+            />
+            <div class="doctor-card-content">
+              <h3>Dr. Emily White</h3>
+              <p class="specialty">Cardiologist</p>
+              <a href="/dashboard" class="btn">Book Appointment</a>
+            </div>
+          </div>
+
+          <div class="doctor-card">
+            <img
+              src="/assets/doc-img2.jpg"
+              alt="Dr. James Brown"
+              class="doctor-card-img"
+            />
+            <div class="doctor-card-content">
+              <h3>Dr. James Brown</h3>
+              <p class="specialty">Orthopedic Surgeon</p>
+              <a href="/dashboard" class="btn">Book Appointment</a>
+            </div>
+          </div>
+
+          <div class="doctor-card">
+            <img
+              src="/assets/doc-img3.jpg"
+              alt="Dr. Sarah Lee"
+              class="doctor-card-img"
+            />
+            <div class="doctor-card-content">
+              <h3>Dr. Sarah Lee</h3>
+              <p class="specialty">Pediatrician</p>
+              <a href="/dashboard" class="btn">Book Appointment</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <%- include('partials/footer') %>
+    <script src="/functionalities/function.js" defer></script>
+  </body>
+</html>

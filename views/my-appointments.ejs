@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Appointments - MediGoneWild</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="shortcut icon" href="/assets/mediGo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/chatbot.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <main>
+      <section class="dashboard-header">
+        <h1>My Appointments</h1>
+        <p>View and manage your upcoming and past appointments.</p>
+      </section>
+
+      <section class="section-container">
+        <div class="dashboard-card">
+          <h3>Upcoming Appointments</h3>
+          <% if (appointments.length === 0) { %>
+          <p>You have no upcoming appointments.</p>
+          <% } else { %> <% } %>
+          <a href="/doctors" class="btn">Book a New Appointment</a>
+        </div>
+      </section>
+    </main>
+
+    <%- include('partials/footer') %>
+    <script src="/functionalities/function.js" defer></script>
+  </body>
+</html>

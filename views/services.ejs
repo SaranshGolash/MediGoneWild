@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Our Services - MediGoneWild</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/services.css" />
+    <link rel="stylesheet" href="/css/chatbot.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <main>
+      <section class="services-page-header">
+        <h1>Departments & Specialties</h1>
+        <p>
+          World-class care across every medical specialty. Find the department
+          you need and connect with our expert team.
+        </p>
+      </section>
+
+      <section class="section-container">
+        <div class="department-grid">
+          <div class="department-card">
+            <div class="department-card-icon">
+              <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="department-card-content">
+              <h3>Cardiology</h3>
+              <p>
+                Expert care for your heart, from preventative check-ups to
+                advanced surgical procedures.
+              </p>
+              <a href="/doctors?specialty=cardiology" class="btn">
+                Find a Doctor
+              </a>
+            </div>
+          </div>
+
+          <div class="department-card">
+            <div class="department-card-icon">
+              <i class="fa-solid fa-bone"></i>
+            </div>
+            <div class="department-card-content">
+              <h3>Orthopedics</h3>
+              <p>
+                Specialized treatment for bones, joints, ligaments, and muscles
+                to get you moving again.
+              </p>
+              <a href="/doctors?specialty=orthopedics" class="btn">
+                Find a Doctor
+              </a>
+            </div>
+          </div>
+
+          <div class="department-card">
+            <div class="department-card-icon">
+              <i class="fa-solid fa-child"></i>
+            </div>
+            <div class="department-card-content">
+              <h3>Pediatrics</h3>
+              <p>
+                Compassionate, comprehensive healthcare for infants, children,
+                and adolescents.
+              </p>
+              <a href="/doctors?specialty=pediatrics" class="btn">
+                Find a Doctor
+              </a>
+            </div>
+          </div>
+
+          <div class="department-card">
+            <div class="department-card-icon">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <div class="department-card-content">
+              <h3>Neurology</h3>
+              <p>
+                Advanced diagnosis and treatment for disorders of the brain,
+                spinal cord, and nervous system.
+              </p>
+              <a href="/doctors?specialty=neurology" class="btn">
+                Find a Doctor
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <%- include('partials/footer') %>
+    <script src="/functionalities/function.js" defer></script>
+  </body>
+</html>

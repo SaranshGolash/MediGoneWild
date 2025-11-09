@@ -1,0 +1,51 @@
+/* === Patient Dashboard === */
+
+.dashboard-header {
+  padding: 6rem 1rem 4rem 1rem;
+  background-color: var(--primary-color-dark);
+}
+
+.dashboard-header h1 {
+  font-size: 2.8rem;
+  color: var(--white);
+  max-width: var(--max-width);
+  margin: auto;
+}
+
+.dashboard-header p {
+  font-size: 1.2rem;
+  color: var(--primary-color-light);
+  max-width: var(--max-width);
+  margin: auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.dashboard-card {
+  background: var(--white);
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-card-icon {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.dashboard-card h3 {
+  font-size: 1.5rem;
+  color: var(--text-head);
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-card p {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}

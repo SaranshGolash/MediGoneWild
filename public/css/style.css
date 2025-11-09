@@ -85,13 +85,24 @@ header {
 }
 
 .logo {
-  display: flex;
-  align-items: center;
+  /* These properties stay on the main container */
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--text-head);
 }
+
+.logo a {
+  /* This is the new flex container */
+  display: flex;
+  align-items: center;
+
+  /* Styling for the link itself */
+  text-decoration: none; /* Removes underline */
+  color: var(--text-head); /* Sets text color */
+  gap: 0.5rem; /* Optional: adds space between image and text */
+}
+
 .logo img {
+  /* This rule remains the same */
   width: 70px;
   height: 70px;
   background-image: transparent;
@@ -131,6 +142,109 @@ header {
 
 .link a:hover {
   color: var(--secondary-color);
+}
+
+/* Style for the new "Login" button */
+.btn.btn-secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn.btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+/* Container for the new auth buttons */
+.nav-auth-btns {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Make the main nav container align all items (links and buttons) */
+.nav-link-container {
+  align-items: center;
+  gap: 2rem;
+}
+
+/* === User Dropdown Menu === */
+.user-menu {
+  position: relative;
+}
+
+.user-menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+}
+
+/* Dropdown arrow icon */
+.user-menu-btn .fa-chevron-down {
+  font-size: 0.8rem;
+  transition: transform 0.3s;
+}
+
+/* Add 'open' class with JS to rotate arrow */
+.user-menu-btn.open .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+.user-dropdown {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 110%; /* Position just below the button */
+  right: 0;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  z-index: 100;
+  overflow: hidden; /* Ensures border-radius on links */
+}
+
+/* Add 'show' class with JS to display */
+.user-dropdown.show {
+  display: block;
+}
+
+.user-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.user-dropdown a i {
+  width: 20px; /* Aligns icons nicely */
+  text-align: center;
+}
+
+.user-dropdown a:hover {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color);
+}
+
+@media (width < 900px) {
+  /* Stack all button groups vertically in the mobile menu */
+  .contact-btn {
+    margin-top: 2rem;
+  }
+
+  .nav-auth-btns {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .nav-auth-btns .btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .header-container {
@@ -365,22 +479,183 @@ header {
   color: var(--text-light);
 }
 
+/* Doctors Section */
+
+.doctors-container {
+  background-color: var(--primary-color-light);
+}
+
+.doctor-grid {
+  margin-top: 4rem;
+  display: grid;
+  /* Adjust grid columns as needed */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.doctor-card {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 5px 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.doctor-card-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: top; /* Focuses on the face */
+}
+
+.doctor-card-content {
+  padding: 1.5rem;
+}
+
+.doctor-card-content h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-head);
+}
+
+.doctor-card-content .specialty {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+/* Footer Section */
+
+/* Responsive adjustments for doctors */
+@media (width < 900px) {
+  .doctor-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width < 600px) {
+  .doctor-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 /* Footer section */
 
 .footer {
+  /* This uses your existing light yellow background */
   background-color: var(--primary-color-light);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* We remove padding here to let the containers manage it */
+  padding-top: 5rem;
 }
 
-.footer-container p {
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap; /* Allows columns to stack on small screens */
+  padding-bottom: 3rem; /* Spacing before the copyright bar */
+}
+
+.footer-col {
+  /* Each column will share space, but won't shrink below 250px */
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Footer Brand/Logo Column */
+.footer-col .logo {
+  margin-bottom: 1rem;
+}
+.footer-col p {
+  color: var(--text-light);
+  max-width: 300px;
+}
+
+/* Footer Links & Contact Columns */
+.footer-col h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-dark); /* Dark text for heading */
+  margin-bottom: 1.5rem;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.75rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-col ul li a {
+  color: var(--text-light);
+  transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+  /* Uses your primary yellow for hover */
+  color: var(--primary-color);
+}
+
+/* Footer Social Icons */
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+  color: var(--primary-color); /* Icon color */
+  border: 1px solid var(--primary-color); /* Border color */
+  border-radius: 50%;
+  transition: 0.3s ease-in-out;
+}
+
+.footer-socials a:hover {
+  background-color: var(--primary-color); /* Background on hover */
+  color: var(--white); /* Icon color on hover */
+  border-color: var(--primary-color);
+}
+
+/* Footer Copyright Bar */
+.footer-bar {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  /* Adds a subtle line to separate it */
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.footer-bar p {
   color: var(--text-dark);
   font-weight: 500;
 }
-.footer-container p a {
+
+.footer-bar p a {
   color: var(--primary-color);
   font-weight: 500;
+}
+
+/* Cleanup old footer styles */
+.footer-container p {
+  /* This is no longer needed */
+  display: none;
 }
 
 @media (width < 900px) {
@@ -482,5 +757,22 @@ header {
   .header-container h1 {
     font-size: 2.5rem;
     line-height: 3rem;
+  }
+}
+
+/* Responsive (Stacking in mobile menu) */
+@media (width < 900px) {
+  .user-menu {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .user-menu-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .user-dropdown {
+    width: 100%;
+    top: 110%;
+    right: auto;
   }
 }

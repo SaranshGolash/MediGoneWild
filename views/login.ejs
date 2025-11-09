@@ -6,12 +6,11 @@
     <link rel="stylesheet" href="/css/auth.css" />
   </head>
   <body>
-    <%- include('partials/header') %>
-
+    <%- include('header') %>
     <main>
       <section class="auth-container">
         <form action="/login" method="POST" class="auth-form">
-          <h2>Login</h2>
+          <h2>Patient Login</h2>
           <input
             type="email"
             name="email"
@@ -25,13 +24,22 @@
             required
           />
           <button type="submit" class="btn">Login</button>
+
           <div class="auth-switch">
             <p>Don't have an account? <a href="/signup">Sign Up Now</a></p>
           </div>
+
+          <div class="auth-divider">OR</div>
+          <a href="/auth/google" class="btn-oauth">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+              alt="Google logo"
+            />
+            Sign in with Google
+          </a>
         </form>
       </section>
     </main>
-
-    <%- include('partials/footer') %>
+    <%- include('footer') %>
   </body>
 </html>
